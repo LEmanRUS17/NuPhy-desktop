@@ -1,0 +1,22 @@
+{
+  "name": "air75-config",
+  "productName": "Air75 Config",
+  "version": "0.1.0",
+  "description": "Настройка клавиш NuPhy Air75 V2 (QMK/VIA)",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "demo": "electron . --demo",
+    "test": "node tools/test-definitions.js",
+    "dist": "electron-builder --win portable"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "local.air75.config",
+    "files": ["main.js", "src/**/*"],
+    "win": { "target": "portable", "signAndEditExecutable": false }
+  }
+}

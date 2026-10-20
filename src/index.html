@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://usevia.app">
+  <title>Air75 Config</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="frame">
+
+    <!-- Подключение -->
+    <section id="auth" class="screen">
+      <div class="auth-lang"><div class="seg small lang-seg"></div></div>
+      <div class="auth-stage">
+        <div class="cable"><div class="cable-wire"></div><div class="cable-plug"></div><div class="cable-tip"></div></div>
+        <div class="kb-case kb-ghost" id="ghostKb"></div>
+      </div>
+      <p class="hint" id="authHint" data-i18n="auth.hint"></p>
+      <button class="pill dark" id="btnConnect" data-i18n="auth.connect"></button>
+      <p class="muted small supported" data-i18n="auth.supported"></p>
+      <footer class="foot" data-i18n="auth.foot"></footer>
+    </section>
+
+    <!-- Основной экран -->
+    <section id="main" class="screen hidden">
+      <header class="topbar">
+        <div class="device">
+          <span class="dot"></span>
+          <div>
+            <div class="dev-name" id="devName">NuPhy Air75 V2</div>
+            <div class="dev-meta" id="devMeta"></div>
+          </div>
+        </div>
+        <nav class="tabs" id="tabs">
+          <button class="tab active" data-tab="keymap" data-i18n="tab.keymap"></button>
+          <button class="tab" data-tab="macros" data-i18n="tab.macros"></button>
+          <button class="tab" data-tab="lighting" data-i18n="tab.lighting"></button>
+        </nav>
+        <div class="top-actions">
+          <button class="link" id="btnBackup" data-i18n="top.export"></button>
+          <button class="link" id="btnRestore" data-i18n="top.import"></button>
+          <button class="link" id="btnDef" data-i18n="top.def" data-i18n-title="top.def.tip"></button>
+          <button class="link danger" id="btnReset" data-i18n="top.reset"></button>
+          <div class="seg small lang-seg"></div>
+        </div>
+      </header>
+
+      <!-- Клавиши -->
+      <div class="panel" data-panel="keymap">
+        <div class="layers">
+          <span class="label" data-i18n="layers.label"></span>
+          <div class="seg" id="layerSeg"></div>
+          <span class="layer-tip" id="layerTip"></span>
+          <div class="track">
+            <span class="track-state" id="trackState"></span>
+            <label class="chk" data-i18n-title="track.select.tip"><input type="checkbox" id="selectOnPress" checked> <span data-i18n="track.select"></span></label>
+          </div>
+        </div>
+        <div class="kb-wrap"><div class="kb-case" id="kb"></div></div>
+
+        <div class="picker">
+          <div class="picker-head">
+            <div class="sel-info">
+              <span class="sel-cap" id="selCap">—</span>
+              <span class="sel-text" id="selText"></span>
+            </div>
+            <div class="seg small" id="groupSeg"></div>
+          </div>
+          <div class="picker-body" id="pickerBody"></div>
+        </div>
+      </div>
+
+      <!-- Макросы -->
+      <div class="panel hidden" data-panel="macros">
+        <div class="macro-layout">
+          <aside class="macro-list" id="macroList"></aside>
+          <div class="macro-editor">
+            <div class="macro-head">
+              <h2 id="macroTitle">M0</h2>
+              <span class="muted" id="macroUsage"></span>
+            </div>
+            <p class="muted small" data-i18n="m.hint"></p>
+            <div id="macroSteps" class="steps"></div>
+            <div class="step-add">
+              <button class="pill ghost" data-add="combo" data-i18n="m.add.combo"></button>
+              <button class="pill ghost" data-add="text" data-i18n="m.add.text"></button>
+              <button class="pill ghost" data-add="delay" data-i18n="m.add.delay"></button>
+            </div>
+            <div class="macro-actions">
+              <button class="pill dark" id="btnSaveMacros" data-i18n="m.save"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Подсветка -->
+      <div class="panel hidden" data-panel="lighting">
+        <div class="light-card" id="lightCard">
+          <div class="row"><label data-i18n="l.effect"></label><select id="lEffect"></select></div>
+          <div class="row"><label data-i18n="l.bright"></label><input type="range" id="lBright" min="0" max="255"><span id="lBrightV"></span></div>
+          <div class="row"><label data-i18n="l.speed"></label><input type="range" id="lSpeed" min="0" max="255"><span id="lSpeedV"></span></div>
+          <div class="row"><label data-i18n="l.hue"></label><input type="range" id="lHue" min="0" max="255" class="hue"><span class="swatch" id="lSwatch"></span></div>
+          <div class="row"><label data-i18n="l.sat"></label><input type="range" id="lSat" min="0" max="255"><span id="lSatV"></span></div>
+          <div class="row end"><button class="pill dark" id="btnSaveLight" data-i18n="l.save"></button></div>
+          <p class="muted small" data-i18n="l.note"></p>
+        </div>
+        <div class="light-card hidden" id="lightNA">
+          <p data-i18n="l.na"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Описание клавиатуры не найдено -->
+    <div class="overlay hidden" id="defPrompt">
+      <div class="dialog">
+        <h3 data-i18n="def.title"></h3>
+        <p id="defText"></p>
+        <p class="muted small" data-i18n="def.where"></p>
+        <div class="dialog-actions">
+          <button class="pill ghost" id="defCancel" data-i18n="def.cancel"></button>
+          <button class="pill dark" id="defLoad" data-i18n="def.load"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+    <div class="busy hidden" id="busy"><div class="bar"><i id="busyBar"></i></div><span id="busyText"></span></div>
+  </div>
+
+  <script src="i18n.js"></script>
+  <script src="keycodes.js"></script>
+  <script src="boards.js"></script>
+  <script src="definitions.js"></script>
+  <script src="via.js"></script>
+  <script src="macros.js"></script>
+  <script src="demo.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
